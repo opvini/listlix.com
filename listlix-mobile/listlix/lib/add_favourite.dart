@@ -36,7 +36,7 @@ class AddFavouriteFormState extends State<AddFavouriteForm> {
 
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  final textEditingCtrl = TextEditingController();
+  final nameTextEditingCtrl = TextEditingController();
 
   FavouriteType _character = FavouriteType.tv;
 
@@ -69,7 +69,7 @@ class AddFavouriteFormState extends State<AddFavouriteForm> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
-                  controller: textEditingCtrl,
+                  controller: nameTextEditingCtrl,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter some text';
@@ -108,7 +108,7 @@ class AddFavouriteFormState extends State<AddFavouriteForm> {
                   Navigator.pop(
                     context,
                     Favourite(
-                      name: textEditingCtrl.text,
+                      name: nameTextEditingCtrl.text,
                       type: _character,
                     ),
                   );
@@ -125,7 +125,7 @@ class AddFavouriteFormState extends State<AddFavouriteForm> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    textEditingCtrl.dispose();
+    nameTextEditingCtrl.dispose();
     super.dispose();
   }
 }
