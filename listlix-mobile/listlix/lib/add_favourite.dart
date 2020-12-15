@@ -76,6 +76,7 @@ class AddFavouriteFormState extends State<AddFavouriteForm> {
                     }
                     return null;
                   },
+                  textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
