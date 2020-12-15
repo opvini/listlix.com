@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import './add_favourite.dart';
 import './model.dart';
@@ -25,12 +26,29 @@ class _FavouritesListPageState extends State<FavouritesListPage> {
         ],
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
         children: List.generate(FavouritesRepository().count() * 2, (index) {
           if (index.isOdd) {
-            return Divider();
+            return Padding(
+              padding: EdgeInsets.only(left: 64.0),
+              child: Divider(height: 0.5),
+            );
           } else {
-            return _buildRow(FavouritesRepository().findAll()[index ~/ 2]);
+            final favourite = FavouritesRepository().findAll()[index ~/ 2];
+            return Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              child: _buildRow(favourite),
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  caption: 'Delete',
+                  color: Colors.red,
+                  icon: Icons.delete,
+                  onTap: () => setState(() {
+                    FavouritesRepository().delete(favourite.name);
+                  }),
+                ),
+              ],
+            );
           }
         }),
       ),
