@@ -59,6 +59,10 @@ class _FavouritesListPageState extends State<FavouritesListPage> {
         item.name,
         style: TextStyle(fontSize: 18.0),
       ),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 4.0,
+      ),
     );
   }
 
