@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './add_favourite.dart';
 import './model.dart';
+import './repository.dart';
 import './toolbox/ui_toolbox.dart';
 
 class FavouritesListPage extends StatefulWidget {
@@ -10,21 +11,8 @@ class FavouritesListPage extends StatefulWidget {
 }
 
 class _FavouritesListPageState extends State<FavouritesListPage> {
-  var _favourites = [
-    Favourite(name: 'Mad Men', type: FavouriteType.tv),
-    Favourite(name: 'Inglourious Basterds', type: FavouriteType.film),
-    Favourite(name: 'Little Wing', type: FavouriteType.song),
-    Favourite(name: 'The Dark Side of the Moon', type: FavouriteType.album),
-    Favourite(name: 'Past Gas', type: FavouriteType.podcast),
-    Favourite(name: 'Resident Evil 3: Nemesis', type: FavouriteType.game),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return _buildFavourites();
-  }
-
-  Widget _buildFavourites() {
     return Scaffold(
       appBar: AppBar(
         title: Text('listlix'),
@@ -38,11 +26,11 @@ class _FavouritesListPageState extends State<FavouritesListPage> {
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),
-        children: List.generate(_favourites.length * 2, (index) {
+        children: List.generate(FavouritesRepository().count() * 2, (index) {
           if (index.isOdd) {
             return Divider();
           } else {
-            return _buildRow(_favourites[(index ~/ 2)]);
+            return _buildRow(FavouritesRepository().findAll()[index ~/ 2]);
           }
         }),
       ),
@@ -75,9 +63,7 @@ class _FavouritesListPageState extends State<FavouritesListPage> {
     );
     // Add the new favourite to the list
     if (newFavourite != null) {
-      setState(() {
-        _favourites.add(newFavourite);
-      });
+      setState(() => FavouritesRepository().save(newFavourite));
     }
   }
 }
