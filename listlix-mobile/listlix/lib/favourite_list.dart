@@ -21,7 +21,7 @@ class _FavouritesListPageState extends State<FavouritesListPage> {
           IconButton(
             icon: Icon(Icons.add),
             tooltip: 'Add new item',
-            onPressed: _pushAddItem,
+            onPressed: _pushAddFavouritePage,
           ),
         ],
       ),
@@ -72,7 +72,7 @@ class _FavouritesListPageState extends State<FavouritesListPage> {
     );
   }
 
-  void _pushAddItem() async {
+  void _pushAddFavouritePage() async {
     // Wait for AddFavouritePage to return a new favourite
     final newFavourite = await Navigator.of(context).push(
       MaterialPageRoute<Favourite>(
